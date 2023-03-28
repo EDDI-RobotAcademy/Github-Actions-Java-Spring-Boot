@@ -32,6 +32,10 @@ public class IngredientImage {
         this.ingredient = ingredient;
     }
 
+    public IngredientImage(String fileRandomName) {
+        this.randomName = fileRandomName;
+    }
+
     public void registerToIngredient(){
         this.ingredient.registerImage(this);
     }

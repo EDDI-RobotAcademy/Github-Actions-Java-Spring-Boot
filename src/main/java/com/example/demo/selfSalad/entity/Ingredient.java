@@ -41,6 +41,13 @@ public class Ingredient {
         this.name = name; this.amount = amount; this.ingredientImage = image;
     }
 
+    public Ingredient(String name, Category category, IngredientImage ingredientImage, Amount amount) {
+        this.name = name;
+        this.category = category;
+        this.ingredientImage = ingredientImage;
+        this.amount = amount;
+    }
+
 
     /**
      * 해당 category 에 새로운 재료를 등록

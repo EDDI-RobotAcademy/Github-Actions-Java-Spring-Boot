@@ -1,6 +1,5 @@
 package com.example.demo.selfSalad.service;
 
-import com.example.demo.selfSalad.Controller.request.IngredientRegisterRequest;
 import com.example.demo.selfSalad.entity.Amount;
 import com.example.demo.selfSalad.entity.Category;
 import com.example.demo.selfSalad.entity.Ingredient;
@@ -9,6 +8,7 @@ import com.example.demo.selfSalad.repository.AmountRepository;
 import com.example.demo.selfSalad.repository.CategoryRepository;
 import com.example.demo.selfSalad.repository.IngredientImageRepository;
 import com.example.demo.selfSalad.repository.IngredientRepository;
+import com.example.demo.selfSalad.service.request.IngredientRegisterRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,7 +57,7 @@ public class SelfSaladServiceImpl implements SelfSaladService {
      */
     @Override
     @Transactional
-    public boolean register(MultipartFile image, IngredientRegisterRequest request){
+    public boolean register(IngredientRegisterRequest request){
 
         // 1. 카테고리 찾기
         log.info("requestIngredientType : " + request.getCategory());

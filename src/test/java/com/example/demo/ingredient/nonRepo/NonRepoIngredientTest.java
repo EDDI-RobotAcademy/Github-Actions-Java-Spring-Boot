@@ -1,7 +1,7 @@
 package com.example.demo.ingredient.nonRepo;
 
-import com.example.demo.selfSalad.Controller.request.IngredientRegisterRequest;
-import com.example.demo.selfSalad.entity.AmountType;
+import com.example.demo.selfSalad.entity.Amount;
+import com.example.demo.selfSalad.entity.IngredientImage;
 import com.example.demo.selfSalad.repository.AmountRepository;
 import com.example.demo.selfSalad.repository.CategoryRepository;
 import com.example.demo.selfSalad.repository.IngredientImageRepository;
@@ -46,7 +46,7 @@ public class NonRepoIngredientTest {
         IngredientRegisterRequest ingredientRegisterRequest = new IngredientRegisterRequest(
                 "재료이름", "채소", 10000,
                 500, 5, 1, 10,
-                MEASURE1.getMeasure(), );
+                MEASURE1.getMeasure(), new Amount(), new IngredientImage(null, "test.png", null));
         /*
         final private String name;
         final private String category;

@@ -62,6 +62,15 @@ public class Amount {
         this.ingredient = ingredient;
     }
 
+    public Amount(Integer price, Integer calorie, Integer max, Integer min, Integer unit, String measure) {
+        this.price = price;
+        this.calorie = calorie;
+        this.max = max;
+        this.max = min;
+        this.unit = unit;
+        this.amountType = measure;
+    }
+
     public void registerToIngredient(){this.ingredient.registerAmount(this); }
 
 

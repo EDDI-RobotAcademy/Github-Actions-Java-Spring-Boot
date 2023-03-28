@@ -1,6 +1,6 @@
 package com.example.demo.selfSalad.Controller;
 
-import com.example.demo.selfSalad.Controller.request.IngredientRegisterRequest;
+import com.example.demo.selfSalad.Controller.request.IngredientRegisterForm;
 import com.example.demo.selfSalad.entity.Ingredient;
 import com.example.demo.selfSalad.service.SelfSaladService;
 import lombok.extern.slf4j.Slf4j;
@@ -46,11 +46,10 @@ public class SelfSaladController {
             consumes = { MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public void ingredientRegister(
             @RequestPart(value = "imageFile")MultipartFile imageFile,
-            @RequestPart(value = "ingredientInfo") IngredientRegisterRequest ingredientRegisterRequest){
+            @RequestPart(value = "ingredientInfo") IngredientRegisterForm ingredientRegisterForm){
         log.info("ingredientRegister()");
 
-        selfSaladService.register( imageFile, ingredientRegisterRequest);
-
+        selfSaladService.register(ingredientRegisterForm.toIngredientRegisterRequest(imageFile));
     }
 
 }
