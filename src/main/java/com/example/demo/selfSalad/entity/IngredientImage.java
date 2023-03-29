@@ -1,12 +1,13 @@
 package com.example.demo.selfSalad.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Getter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class IngredientImage {
@@ -15,30 +16,22 @@ public class IngredientImage {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
     @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
 
     @Column
-    private String fileName;
-
-    @Column
-    private String randomName;
+    private String randomFileName;
 
 
-    public IngredientImage(String fileName, String randomName, Ingredient ingredient) {
-        this.fileName = fileName;
-        this.randomName = randomName;
+    public IngredientImage(String randomFileName) {
+        this.randomFileName = randomFileName;
+    }
+
+    public static IngredientImage of (String randomFileName) {
+        return new IngredientImage(randomFileName);
+    }
+
+    public void setIngredient (Ingredient ingredient) {
         this.ingredient = ingredient;
     }
-
-    public IngredientImage(String fileRandomName) {
-        this.randomName = fileRandomName;
-    }
-
-    public void registerToIngredient(){
-        this.ingredient.registerImage(this);
-    }
-
-
 }

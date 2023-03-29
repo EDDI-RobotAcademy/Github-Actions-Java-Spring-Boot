@@ -1,25 +1,8 @@
 package com.example.demo.selfSalad.entity;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-@Getter
-@RequiredArgsConstructor
 public enum CategoryType {
-
-    VEGETABLE("채소"), MEAT("육류"), TOPPING("토핑");
-
-    final private String type;
-
-//    public String getType() {
-//        return type;
-//    }
-//
-//
-//    public static IngredientType valueOfTypeName(String type) {
-//        return Arrays.stream(values())
-//                .filter(value -> value.type.equals(type))
-//                .findAny()
-//                .orElse(null);
-//    }
+    // 데이터 전송할 때 VEGETABLE, MEAT, TOPPING으로 전송하세요.
+    VEGETABLE,
+    MEAT,
+    TOPPING;
 }

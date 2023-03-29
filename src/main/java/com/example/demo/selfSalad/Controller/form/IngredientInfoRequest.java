@@ -1,4 +1,4 @@
-package com.example.demo.selfSalad.Controller.request;
+package com.example.demo.selfSalad.Controller.form;
 
 import com.example.demo.selfSalad.entity.convert.StringToIntegerConverter;
 import lombok.Getter;

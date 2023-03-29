@@ -1,39 +1,39 @@
 package com.example.demo.selfSalad.service;
 
-import com.example.demo.selfSalad.entity.Ingredient;
-import com.example.demo.selfSalad.repository.IngredientCategoryRepository;
-import com.example.demo.selfSalad.service.request.IngredientRegisterRequest;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Slf4j
 @Service
-@RequiredArgsConstructor
-public class SelfSaladServiceImpl implements SelfSaladService {
-
-    final private IngredientCategoryRepository ingredientCategoryRepository;
-
-    @Override
-    public void createCategory(Long id, String name) {
-
-    }
-
-    @Override
-    public List<Ingredient> list(String ingredientType) {
-        return null;
-    }
-
-    @Override
-    public boolean register(IngredientRegisterRequest ingredientRegisterRequest) {
-        // 1. 카테고리 찾기
-//        CategoryType categoryType = ingredientRegisterRequest.getIngredientCategory().getIngredientCategoryType();
-//        log.info("requestIngredientType : " + categoryType.getValue());
-
+public class SelfSaladServiceImplBackup {
+//
+//    @Autowired
+//    IngredientRepository ingredientRepository;
+//
+//    @Autowired
+//    IngredientCategoryRepository categoryRepository;
+//
+//    @Autowired
+//    IngredientImageRepository ingredientImageRepository;
+//
+//    @Autowired
+//    AmountRepository amountRepository;
+//
+//    public void createCategory(Long id, CategoryType categoryType){
+//        IngredientCategory category = new IngredientCategory(id, categoryType);
+//        categoryRepository.save(category);
+//    }
+//
+//    @Override
+//    @Transactional
+//    public boolean register(IngredientRegisterRequest request){
+//
+//        // 1. 카테고리 찾기
+//        log.info("requestIngredientType : " + request.getIngredientCategory());
+//
 //        Optional<IngredientCategory> maybeCategory =
-//                ingredientCategoryRepository.findByCategoryName(request.getIngredientCategory().getCategoryType());
+//                //categoryRepository.findByCategoryName(request.getIngredientCategory().getCategoryType());
+//                categoryRepository.findByCategoryName("request.getIngredientCategory().getCategoryType()");
 //
 //        log.info("1 차 시도");
 //
@@ -100,7 +100,30 @@ public class SelfSaladServiceImpl implements SelfSaladService {
 ////        log.info("여기였군");
 ////
 ////        ingredientRepository.save( ingredient);
+//
+//        return true;
+//    }
+//
+//    @Override
+//    public void createCategory(Long id, String name) {
+//
+//    }
+//
+//    @Override
+//    public List<Ingredient> list(String requestType){
+//
+//        Optional<IngredientCategory> maybeCategory = categoryRepository.findByCategoryName(requestType);
+//
+//        if (maybeCategory.isEmpty()) {
+//            return null;
+//        }
+//        IngredientCategory category = maybeCategory.get();
+//
+//        //List <Ingredient>maybeIngredient = ingredientImageRepository.findByCategoryId( category.getId());
+//
+//        //return ingredientRepository.findByCategoryId( category.getId());
+//        return null;
+//
+//    }
 
-        return true;
-    }
 }

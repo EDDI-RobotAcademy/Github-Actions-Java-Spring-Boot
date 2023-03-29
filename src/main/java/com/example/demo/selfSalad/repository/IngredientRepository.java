@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
 
-    @Query("select distinct i from Ingredient i where i.category.id = :categoryId")
-            //join amount a on i.id = a.ingredient_id join ingredient_image g on i.id = g.id
-//select * from ingredient i join amount a on i.id = a.ingredient_id join ingredient_image g on i.id = g.id;
-    List<Ingredient> findByCategoryId( Long categoryId );
+//    @Query("select distinct i from Ingredient i where i.category.id = :categoryId")
+//            //join amount a on i.id = a.ingredient_id join ingredient_image g on i.id = g.id
+////select * from ingredient i join amount a on i.id = a.ingredient_id join ingredient_image g on i.id = g.id;
+//    List<Ingredient> findByCategoryId( Long categoryId );
 
     /*
         @Query("select n from NovelInformation n join fetch n.member m where m.nickName = :nickName order by n.id desc")
@@ -31,9 +31,9 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
 
 
 
-//    @Query("select c from Category c where c.ingredient_type = :ingredientType")
+//    @Query("select c from IngredientCategory c where c.ingredient_type = :ingredientType")
 //    @Query("select i from Ingredient i join fetch i.category c where i.category_id= c.categoryId ")
-//    Category findByIngredientType(IngredientType ingredientType);
+//    IngredientCategory findByIngredientType(IngredientType ingredientType);
 
 
 }

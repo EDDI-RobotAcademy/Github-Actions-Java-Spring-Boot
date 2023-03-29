@@ -1,49 +1,40 @@
 package com.example.demo.selfSalad.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@NoArgsConstructor
-@Getter
+@Table(
+        uniqueConstraints = @UniqueConstraint(
+                name = "category_uq_category_name",
+                columnNames = {"categoryType"})
+)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String categoryName;
-        //private IngredientType ingredientType;
+    private CategoryType categoryType;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-    @JsonIgnore
-    private List<Ingredient> ingredientList = new ArrayList<>();
-
-
-    public Category(Long id, String categoryName) {
-        this.id = id;
-        this.categoryName = categoryName;
+    public Category (CategoryType categoryType) {
+        this.categoryType = categoryType;
     }
 
-    public Category(String categoryName) {
-        this.categoryName = categoryName;
+    public CategoryType getCategoryType() {
+        return categoryType;
     }
 
-    public void createCategory (Long id, String categoryName){
-        Category category = new Category(id, categoryName);
-    }
-
-    /**
-     * Category 에 해당하는 재료 추가하기
-     * @param ingredient
-     */
-    public void registerIngredient(Ingredient ingredient) {
-        this.ingredientList.add(ingredient);
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", categoryType=" + categoryType +
+                '}';
     }
 }
-
