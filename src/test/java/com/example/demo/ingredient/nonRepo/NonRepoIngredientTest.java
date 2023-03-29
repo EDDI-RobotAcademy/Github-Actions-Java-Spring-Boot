@@ -1,6 +1,6 @@
 package com.example.demo.ingredient.nonRepo;
 
-import com.example.demo.selfSalad.Controller.form.IngredientRegisterForm;
+import com.example.demo.selfSalad.controller.form.IngredientRegisterForm;
 import com.example.demo.selfSalad.entity.*;
 import com.example.demo.selfSalad.repository.*;
 import com.example.demo.selfSalad.service.request.IngredientRegisterRequest;
