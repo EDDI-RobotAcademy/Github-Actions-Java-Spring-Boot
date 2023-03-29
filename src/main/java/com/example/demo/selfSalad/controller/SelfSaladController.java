@@ -1,15 +1,12 @@
-package com.example.demo.selfSalad.Controller;
+package com.example.demo.selfSalad.controller;
 
-import com.example.demo.selfSalad.Controller.form.IngredientRegisterForm;
-import com.example.demo.selfSalad.entity.Ingredient;
+import com.example.demo.selfSalad.controller.form.IngredientRegisterForm;
 import com.example.demo.selfSalad.service.SelfSaladService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -23,7 +20,7 @@ public class SelfSaladController {
     public void ingredientRegister(
             @RequestPart(value = "imageFile") MultipartFile imageFile,
             @RequestPart(value = "ingredientInfo") IngredientRegisterForm ingredientRegisterForm){
-        log.info("ingredientRegister()");
+        log.info("ingredientRegister(): " + ingredientRegisterForm);
 
         selfSaladService.register(ingredientRegisterForm.toIngredientRegisterRequest(imageFile));
     }
