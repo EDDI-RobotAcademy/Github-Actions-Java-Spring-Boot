@@ -8,9 +8,5 @@ import java.util.List;
 
 public interface SelfSaladService {
 
-    void createCategory(Long id, String name);
-    List<Ingredient> list(String ingredientType);
-
-
     boolean register(IngredientRegisterRequest ingredientRegisterRequest);
 }
