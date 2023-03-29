@@ -4,6 +4,7 @@ import com.example.demo.selfSalad.controller.form.IngredientRegisterForm;
 import com.example.demo.selfSalad.entity.*;
 import com.example.demo.selfSalad.repository.*;
 import com.example.demo.selfSalad.service.request.IngredientRegisterRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -12,7 +13,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -22,9 +31,13 @@ import java.nio.file.Paths;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @DisplayName("일반 게시판에 대한 테스트")
 @SpringBootTest
+@AutoConfigureMockMvc
 public class NonRepoIngredientTest {
 
 //    @Mock
@@ -38,6 +51,9 @@ public class NonRepoIngredientTest {
 //
 //    @InjectMocks
 //    private SelfSaladServiceImplBackup mockSelfSaladService;
+
+    @Autowired
+    private WebApplicationContext webApplicationContext;
 
     @Autowired
     private IngredientRepository ingredientRepository;
@@ -155,5 +171,44 @@ public class NonRepoIngredientTest {
                         ingredientRegisterRequest.getMin());
 
         ingredientAmountRepository.save(ingredientAmount);
+    }
+
+    @Test
+    public void whenFileUploaded_thenVerifyStatus() throws Exception {
+        MockMultipartFile imageFile
+                = new MockMultipartFile(
+                "imageFile",
+                "hello.txt",
+                MediaType.TEXT_PLAIN_VALUE,
+                "Hello, World!".getBytes()
+        );
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String content = objectMapper.writeValueAsString(new IngredientRegisterForm("돼지고기",
+                CategoryType.MEAT,
+                10000, 50, 5, 1, 1,
+                AmountType.COUNT));
+
+        MockMultipartFile ingredientInfo
+                = new MockMultipartFile(
+                "ingredientInfo",
+                "jsonData",
+                MediaType.APPLICATION_JSON_VALUE,
+                content.getBytes()
+        );
+
+        IngredientRegisterForm ingredientRegisterForm =
+                new IngredientRegisterForm("돼지고기",
+                        CategoryType.MEAT,
+                        10000, 50, 5, 1, 1,
+                        AmountType.COUNT);
+
+        MockMvc mockMvc
+                = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        mockMvc.perform(multipart("/selfsalad/register")
+                .file(imageFile)
+                .file(ingredientInfo))
+                .andExpect(status().isOk());
     }
 }
