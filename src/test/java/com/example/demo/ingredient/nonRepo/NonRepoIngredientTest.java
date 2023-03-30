@@ -77,50 +77,24 @@ public class NonRepoIngredientTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    private void prepareFileInputTest () throws IOException {
-        final String pathToLoad = Paths.get("D:\\picture\\test.png").toString();
-        System.out.println("path: " + pathToLoad);
-        File file = new File(pathToLoad);
-        FileItem fileItem = new DiskFileItem(
-                "mainFile", Files.probeContentType(file.toPath()),
-                false, file.getName(), (int) file.length(), file.getParentFile());
-
-        try {
-            FileInputStream input = new FileInputStream(file);
-            OutputStream output = fileItem.getOutputStream();
-            IOUtils.copy(input, output);
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
-
-        imageFile = new CommonsMultipartFile(fileItem);
-    }
-
-    @DisplayName("Post method로 식재료 등록 테스트")
-    @Test
-    public void 식재료_등록_테스트 () {
-//        IngredientRegisterForm ingredientRegisterRequest = new IngredientRegisterForm(
-//                "재료이름", "채소", 10000,
-//                500, 5, 1, 10,
-//                MEASURE1.getMeasure(), new IngredientAmount(), new IngredientImage(null, "test.png", null));
-//        /*
-//        final private String name;
-//        final private CategoryType category;
-//        final private Integer price;
-//        final private Integer calorie;
-//        final private Integer max;
-//        final private Integer min;
-//        final private Integer unit;
-//        final private AmountType measure;
-//         */
+//    private void prepareFileInputTest () throws IOException {
+//        final String pathToLoad = Paths.get("D:\\picture\\test.png").toString();
+//        System.out.println("path: " + pathToLoad);
+//        File file = new File(pathToLoad);
+//        FileItem fileItem = new DiskFileItem(
+//                "mainFile", Files.probeContentType(file.toPath()),
+//                false, file.getName(), (int) file.length(), file.getParentFile());
 //
-//        Board board = boardRequest.toBoard();
+//        try {
+//            FileInputStream input = new FileInputStream(file);
+//            OutputStream output = fileItem.getOutputStream();
+//            IOUtils.copy(input, output);
+//        } catch (IOException exception) {
+//            exception.printStackTrace();
+//        }
 //
-//        when(mockBoardRepository.save(board))
-//                .thenReturn(new Board("제목", "작성자", "내용"));
-//
-//        assertThat(mockBoardService.register(boardRequest)).isEqualTo(board);
-    }
+//        imageFile = new CommonsMultipartFile(fileItem);
+//    }
 
     @DisplayName("enum Test")
     @Test
@@ -131,47 +105,49 @@ public class NonRepoIngredientTest {
         assertEquals(categoryType, CategoryType.MEAT);
     }
 
-    @DisplayName("enum Test")
-    @Test
-    public void enum_변환값_입력_테스트 () throws IOException {
-        IngredientRegisterForm ingredientRegisterForm =
-                new IngredientRegisterForm("돼지고기",
-                        CategoryType.MEAT,
-                        10000, 50, 5, 1, 1,
-                        AmountType.COUNT);
-
-        prepareFileInputTest();
-        System.out.println(imageFile.getOriginalFilename());
-
-        IngredientRegisterRequest ingredientRegisterRequest =
-                ingredientRegisterForm.toIngredientRegisterRequest(imageFile);
-
-        Ingredient ingredient = ingredientRegisterRequest.toIngredient();
-        System.out.println(ingredient);
-
-        ingredientRepository.save(ingredient);
-
-        final Category category =
-                categoryRepository.findByCategoryType(ingredientRegisterRequest.getCategoryType()).get();
-        final IngredientCategory ingredientCategory =
-                new IngredientCategory(ingredient, category);
-
-        ingredientCategoryRepository.save(ingredientCategory);
-
-        System.out.println(category);
-
-        final Amount amount =
-                amountRepository.findByAmountType(ingredientRegisterRequest.getAmountType()).get();
-        final IngredientAmount ingredientAmount =
-                new IngredientAmount(ingredient, amount,
-                        ingredientRegisterRequest.getPrice(),
-                        ingredientRegisterRequest.getCalorie(),
-                        ingredientRegisterRequest.getUnit(),
-                        ingredientRegisterRequest.getMax(),
-                        ingredientRegisterRequest.getMin());
-
-        ingredientAmountRepository.save(ingredientAmount);
-    }
+    // 테스트 할 때 이 파트는 실제 파일이 필요해서 의존성 문제가 존재함
+//    @DisplayName("enum Test")
+//    @Test
+//    public void 식재료_등록_테스트 () throws IOException {
+//        IngredientRegisterForm ingredientRegisterForm =
+//                new IngredientRegisterForm("돼지고기",
+//                        CategoryType.MEAT,
+//                        10000, 50, 5, 1, 1,
+//                        AmountType.COUNT);
+//
+//        // 실 파일 테스트라 문제가 좀 있음.
+//        prepareFileInputTest();
+//        System.out.println(imageFile.getOriginalFilename());
+//
+//        IngredientRegisterRequest ingredientRegisterRequest =
+//                ingredientRegisterForm.toIngredientRegisterRequest(imageFile);
+//
+//        Ingredient ingredient = ingredientRegisterRequest.toIngredient();
+//        System.out.println(ingredient);
+//
+//        ingredientRepository.save(ingredient);
+//
+//        final Category category =
+//                categoryRepository.findByCategoryType(ingredientRegisterRequest.getCategoryType()).get();
+//        final IngredientCategory ingredientCategory =
+//                new IngredientCategory(ingredient, category);
+//
+//        ingredientCategoryRepository.save(ingredientCategory);
+//
+//        System.out.println(category);
+//
+//        final Amount amount =
+//                amountRepository.findByAmountType(ingredientRegisterRequest.getAmountType()).get();
+//        final IngredientAmount ingredientAmount =
+//                new IngredientAmount(ingredient, amount,
+//                        ingredientRegisterRequest.getPrice(),
+//                        ingredientRegisterRequest.getCalorie(),
+//                        ingredientRegisterRequest.getUnit(),
+//                        ingredientRegisterRequest.getMax(),
+//                        ingredientRegisterRequest.getMin());
+//
+//        ingredientAmountRepository.save(ingredientAmount);
+//    }
 
     @Test
     public void whenFileUploaded_thenVerifyStatus() throws Exception {
@@ -197,12 +173,6 @@ public class NonRepoIngredientTest {
                 MediaType.APPLICATION_JSON_VALUE,
                 content.getBytes()
         );
-
-        IngredientRegisterForm ingredientRegisterForm =
-                new IngredientRegisterForm("돼지고기",
-                        CategoryType.MEAT,
-                        10000, 50, 5, 1, 1,
-                        AmountType.COUNT);
 
         MockMvc mockMvc
                 = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
