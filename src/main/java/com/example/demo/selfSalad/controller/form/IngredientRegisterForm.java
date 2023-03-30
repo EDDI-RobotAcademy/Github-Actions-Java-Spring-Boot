@@ -1,7 +1,6 @@
 package com.example.demo.selfSalad.controller.form;
 
 import com.example.demo.selfSalad.entity.*;
-import com.example.demo.selfSalad.entity.convert.IngredientCategoryTypeRequestConverter;
 import com.example.demo.selfSalad.service.request.IngredientRegisterRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -9,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Convert;
 import java.util.UUID;
 
 @Getter
