@@ -11,6 +11,15 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     dialect: org.hibernate.dialect.MySQL8Dialect
 
+  data:
+    mongodb:
+      username: eddi
+      password: eddi@123
+      authentication-database: admin
+      database: test-db
+      port: 27017
+      host: localhost
+
   jpa:
     open-in-view: false
     database: mysql
