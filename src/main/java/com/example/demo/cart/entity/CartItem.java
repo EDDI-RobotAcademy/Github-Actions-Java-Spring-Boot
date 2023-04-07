@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
+@ToString(exclude = "cart")
 @NoArgsConstructor
 public class CartItem {
 
@@ -25,6 +26,13 @@ public class CartItem {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
+    public CartItem(Product product, Long count) {
+        this.product = product;
+        this.count = count;
+    }
 
-
+    public void setCart (Cart cart) {
+        this.cart = cart;
+        //cart.setCartItemList(this);
+    }
 }

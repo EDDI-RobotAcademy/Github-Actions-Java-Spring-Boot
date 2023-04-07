@@ -2,15 +2,14 @@ package com.example.demo.cart.entity;
 
 import com.example.demo.member.entity.Member;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@ToString(exclude = "member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Cart {
 
@@ -27,4 +26,14 @@ public class Cart {
 
     @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY)
     private List<CartItem> cartItemList = new ArrayList<>();
+
+    public Cart(Long totalCount, Member member) {
+        this.totalCount = totalCount;
+        this.member = member;
+    }
+
+    public void setCartItemList(CartItem cartItem) {
+        this.cartItemList.add(cartItem);
+        cartItem.setCart(this);
+    }
 }
