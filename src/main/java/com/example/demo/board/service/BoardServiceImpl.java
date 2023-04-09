@@ -36,7 +36,8 @@ public class BoardServiceImpl implements BoardService {
         board.setWriter(boardRequest.getWriter());
         board.setContent(boardRequest.getContent());
 
-        boardRepository.save(board);
+        Board newBoard = boardRepository.save(board);
+        System.out.println("newBoard = " + newBoard);
 
         return board;
     }
