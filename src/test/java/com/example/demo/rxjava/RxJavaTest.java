@@ -93,7 +93,7 @@ public class RxJavaTest {
                 }));
 
         do {
-            // executing something useful...
+            //
         } while (!subscription.get().isDisposed());
     }
 

@@ -89,7 +89,7 @@ public class productTest {
         System.out.println("multipartFiles.get(0).toString(): " + multipartFiles.get(0).toString());
         System.out.println("multipartFiles.get(1).toString(): " + multipartFiles.get(1).toString());
 
-        String productName = "좋은약";
+        String productName = "나쁜약";
         Long productPrice = 10000L;
 
         ProductRegisterForm productRegisterForm = new ProductRegisterForm(productName, productPrice);
