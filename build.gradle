@@ -33,10 +33,14 @@ dependencies {
 	// https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava
 	implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
 
+	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch
+	implementation 'org.springframework.data:spring-data-elasticsearch:4.4.2'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation "org.testcontainers:elasticsearch:1.16.3"
 }
 
 tasks.named('test') {

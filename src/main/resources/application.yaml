@@ -1,5 +1,4 @@
 
-
 server:
   port: 7777
 
@@ -11,22 +10,29 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     dialect: org.hibernate.dialect.MySQL8Dialect
 
-#  data:
-#    mongodb:
-#      username: eddi
-#      password: eddi@123
-#      authentication-database: admin
-#      database: test-db
-#      port: 27017
-#      host: localhost
+  data:
+    mongodb:
+      username: eddi
+      password: eddi@123
+      authentication-database: admin
+      database: test-db
+      port: 27017
+      host: localhost
+
+  profiles:
+    active: elk
+
 
   jpa:
+    properties:
+      hibernate:
+        format_sql: true
     open-in-view: false
     database: mysql
     show-sql: true
     generate-ddl: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
 
   cache:
     type: redis
@@ -39,3 +45,15 @@ spring:
     multipart:
       maxFileSize: 10MB
       maxRequestSize: 10MB
+
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          elasticsearch:
+            client:
+              WIRE=TRACE:

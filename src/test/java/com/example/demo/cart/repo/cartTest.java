@@ -44,7 +44,7 @@ public class cartTest {
         // 흐름 파악이 잘 안됨
         // memberId는 세션, productId는 props
         AddCartRequest addCartRequest =
-                new AddCartRequest(1L, 1L, 3L);
+                new AddCartRequest(1L, 3L, 3L);
 
         Long memberId = addCartRequest.getMemberId();
         Long productId = addCartRequest.getProductId();
